@@ -1,0 +1,52 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+skinparam linetype polyline
+node "جهاز المستخدم (جوال / حاسوب)" as dev {
+  component "تطبيق Flet\n(gb.app + screens)" as app
+  component "محرك الألعاب (نسخة)\nengine/" as eng
+  file "طابور مشفّر\nAES-256-GCM" as q
+}
+node "خادم سحابي (docker compose)" as srv {
+  component nginx
+  component "خادم الروبوت\npython-socketio + uvicorn" as rt
+  component "Django REST\ncore" as dj
+  database "PostgreSQL 16" as pg
+}
+app --> eng
+app --> q
+app --> nginx : HTTPS (REST)
+app --> nginx : WebSocket (Socket.IO)
+nginx --> dj
+nginx --> rt
+rt --> dj : HTTP داخلي\nX-Internal-Key
+dj --> pg : SQL
+@enduml

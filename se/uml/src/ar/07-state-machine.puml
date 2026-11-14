@@ -1,0 +1,56 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+skinparam linetype polyline
+hide empty description
+state "خامل\nidle" as IDLE
+state "يعمل\nrunning" as RUNNING
+state "يتوقف\nstopping" as STOPPING
+state "انتهى\nfinished" as FINISHED #E8FFD0
+state "أُوقف\nstopped" as STOPPED #E8FFD0
+state "انقطع\ninterrupted" as INTERRUPTED #E8FFD0
+state "فشل\nfailed" as FAILED #E8FFD0
+[*] --> IDLE
+IDLE --> RUNNING : تشغيل (start)
+RUNNING --> STOPPING : إيقاف (stop)
+STOPPING --> STOPPING : إيقاف (stop)
+RUNNING --> FINISHED : انتهى الجدول (done)
+STOPPING --> STOPPED : انتهى الجدول (done)
+RUNNING --> INTERRUPTED : انقطاع الاتصال (connection_lost)
+STOPPING --> INTERRUPTED : انقطاع الاتصال (connection_lost)
+RUNNING --> FAILED : خطأ (error)
+STOPPING --> FAILED : خطأ (error)
+STOPPED -[#8A93B5,dashed]-> IDLE : جلسة جديدة (reset)
+FINISHED -[#8A93B5,dashed]-> IDLE : جلسة جديدة (reset)
+FAILED -[#8A93B5,dashed]-> IDLE : جلسة جديدة (reset)
+INTERRUPTED -[#8A93B5,dashed]-> IDLE : جلسة جديدة (reset)
+note right of RUNNING : يُولَّد هذا الرسم من جدول TRANSITIONS في bot.py:\n13 انتقالاً مسموحاً، وأي انتقال آخر يرفع IllegalTransition
+@enduml

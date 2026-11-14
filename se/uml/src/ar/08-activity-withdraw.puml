@@ -1,0 +1,72 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+|المستخدم|
+start
+:يختار المبلغ وطريقة السحب;
+|التطبيق|
+:POST /api/withdrawals/;
+|الخادم (Django)|
+if (طريقة معروفة؟) then (لا)
+  :400;
+  stop
+endif
+if (مبلغ > 0؟) then (لا)
+  :400;
+  stop
+endif
+:BEGIN;
+|قاعدة البيانات|
+:SELECT … FOR UPDATE\n(قفل صف المستخدم);
+note right
+  أي طلب سحب آخر لنفس المستخدم
+  ينتظر هنا حتى COMMIT
+end note
+|الخادم (Django)|
+if (المبلغ ≤ الرصيد؟) then (لا)
+  :ROLLBACK\n400 الرصيد غير كافٍ;
+  stop
+else (نعم)
+  |قاعدة البيانات|
+  :INSERT Withdrawal;
+  |الخادم (Django)|
+  :check_invariant(الرصيد ≥ 0);
+  :COMMIT;
+  fork
+    :سجل أمني;
+  fork again
+    :تنبيه;
+  end fork
+endif
+|التطبيق|
+:يعرض الرصيد الجديد;
+stop
+@enduml

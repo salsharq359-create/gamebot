@@ -1,0 +1,81 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+skinparam linetype polyline
+set separator none
+package "app.gb" {
+  package "app.py" <<تحكم>>
+  package "screens" <<عرض>> {
+    package "course_labs"
+    package "account_screens"
+  }
+  package "client"
+  package "offline"
+  package "ui"
+  package "engine"
+  package "tm355"
+  package "algorithms"
+}
+package "realtime.realtime" {
+  package "server"
+  package "bot"
+  package "games"
+}
+package "backend.core" {
+  package "views"
+  package "sync_rules"
+  package "advisor"
+  package "contracts"
+  package "auth"
+  package "models"
+}
+"app.py" ..> "course_labs"
+"app.py" ..> "account_screens"
+"course_labs" ..> "client"
+"course_labs" ..> "ui"
+"course_labs" ..> "tm355"
+"course_labs" ..> "algorithms"
+"account_screens" ..> "ui"
+"app.py" ..> "client"
+"app.py" ..> "offline"
+"app.py" ..> "engine"
+"offline" ..> "tm355"
+"server" ..> "bot"
+"bot" ..> "games"
+"views" ..> "sync_rules"
+"views" ..> "advisor"
+"views" ..> "contracts"
+"advisor" ..> "contracts"
+"views" ..> "auth"
+"sync_rules" ..> "models"
+"views" ..> "models"
+"engine" .[#B0B0B0].> "bot" : نسخة مطابقة
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+participant "طلب سحب 1" as A
+database PostgreSQL as DB
+participant "طلب سحب 2" as B
+== قبل TM354: transaction.atomic فقط ==
+A -> DB : الرصيد؟
+B -> DB : الرصيد؟
+DB --> A : 5$
+DB --> B : 5$
+A -> DB : INSERT 5$ (OK)
+B -> DB : INSERT 5$ (OK)
+note over A, B #FFE0E0 : الرصيد = -5$ (خرق الثابت). في الاختبار: 5 طلبات فصار الرصيد -20$
+== بعد TM354: SELECT … FOR UPDATE ==
+A -> DB : قفل المستخدم
+B -> DB : قفل المستخدم
+note right of B : ينتظر
+A -> DB : الرصيد؟ 5$ ثم INSERT 5$ ثم COMMIT
+DB --> B : القفل متاح
+B -> DB : الرصيد؟ 0$
+DB --> B : 400 الرصيد غير كافٍ
+note over A, B #E0FFE0 : ينجح طلب واحد فقط، والرصيد 0
+@enduml

@@ -1,0 +1,69 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+skinparam linetype polyline
+autonumber
+actor "اللاعب" as P
+participant "التطبيق\n(Flet)" as A
+participant "خادم الروبوت\n(socketio)" as R
+participant "run_session\n+ Game" as G
+participant "Django\nREST" as D
+database PostgreSQL as DB
+P -> A : تشغيل الروبوت
+A -> R : start_bot(rounds, tasks, delta)
+R -> D : GET /api/user/accounts/
+D --> R : الألعاب المرتبطة
+R -> R : BotSession.start()
+R --> A : ok
+R ->> A : bot_started
+loop لكل حدث من الجلسة
+  R -> G : next()
+  G --> R : move / log / task
+  alt task
+    R -> D : POST /api/internal/earnings/
+    D -> DB : SELECT … FOR UPDATE (قفل المستخدم)
+    D -> DB : عدّ مهام اليوم ثم الإنشاء
+    D --> R : accepted, cents
+    R ->> A : earning
+  else move
+    R ->> A : bot_event (إطار فروق)
+  end
+  opt طلب الإيقاف
+    P -> A : إيقاف
+    A -> R : stop_bot
+    R -> R : BotSession.fire("stop")
+  end
+end
+R -> R : BotSession.fire("done")
+R -> D : POST /api/internal/sessions/
+R ->> A : bot_done(outcome)
+A -> A : session.fire("done")
+@enduml

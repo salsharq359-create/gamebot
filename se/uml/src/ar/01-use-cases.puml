@@ -1,0 +1,79 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+skinparam linetype polyline
+actor "اللاعب" as P
+actor "خادم الروبوت" as RS <<system>>
+rectangle "جيم بوت" {
+  usecase "إنشاء حساب / دخول" as UC1
+  usecase "ربط الألعاب" as UC2
+  usecase "طلب خطة من المستشار" as UC3
+  usecase "تشغيل الروبوت" as UC4
+  usecase "إيقاف الروبوت" as UC5
+  usecase "اللعب على الجهاز بدون اتصال" as UC6
+  usecase "مزامنة النتائج" as UC7
+  usecase "عرض الأرباح والتحليلات" as UC8
+  usecase "طلب سحب (محاكاة)" as UC9
+  usecase "إضافة منصة وربح يدوي" as UC10
+  usecase "تصدير بياناتي / حذف حسابي" as UC11
+  usecase "التحقق من الهوية" as AUTH
+}
+P -right-> UC1
+P -right-> UC2
+P -right-> UC3
+P -right-> UC4
+P -right-> UC5
+P -right-> UC8
+P -right-> UC9
+P -right-> UC10
+P -right-> UC11
+UC1 -[hidden]down- UC2
+UC2 -[hidden]down- UC3
+UC3 -[hidden]down- UC4
+UC4 -[hidden]down- UC5
+UC5 -[hidden]down- UC8
+UC8 -[hidden]down- UC9
+UC9 -[hidden]down- UC10
+UC10 -[hidden]down- UC11
+UC4 -[hidden]right- UC6
+UC6 -[hidden]down- UC7
+UC7 -[hidden]down- AUTH
+UC4 ..> AUTH : <<include>>
+UC9 ..> AUTH : <<include>>
+UC6 ..> UC4 : <<extend>>\n[لا يوجد اتصال]
+UC7 ..> AUTH : <<include>>
+UC6 ..> UC7 : <<precedes>>
+UC6 -right- RS
+note right of UC7
+  النتائج تُحفظ مشفّرة على الجهاز
+  والخادم يتحقق من كل سجل عند المزامنة
+end note
+@enduml
