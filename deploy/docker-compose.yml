@@ -1,0 +1,51 @@
+# كل أجزاء جيم بوت (بايثون) على خادم واحد مثل AWS EC2:
+#   cp .env.example .env   # ثم عدّل القيم
+#   docker compose up -d --build
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gamebot
+      POSTGRES_USER: gamebot
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?set DATABASE_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:            # Django
+    build: ../backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_HOST: db
+      DJANGO_DEBUG: "0"
+    depends_on: [db]
+
+  realtime:           # python-socketio
+    build: ../realtime
+    restart: unless-stopped
+    environment:
+      DJANGO_URL: http://backend:8000
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:?set INTERNAL_API_KEY in .env}
+    depends_on: [backend]
+
+  app:                # واجهة Flet (نسخة الويب)
+    build: ../app
+    restart: unless-stopped
+    environment:
+      API_URL: http://backend:8000
+      REALTIME_URL: http://realtime:3001
+    depends_on: [backend, realtime]
+
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /var/www/certbot:/var/www/certbot:ro
+    depends_on: [backend, realtime, app]
+
+volumes:
+  pgdata:
