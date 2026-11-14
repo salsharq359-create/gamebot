@@ -1,0 +1,10 @@
+pandas>=2.2
+scipy>=1.11
+matplotlib>=3.8
+psycopg[binary]>=3.2
+pymongo>=4.6
+mongomock>=4.1
+nbformat>=5.9
+nbconvert>=7.0
+ipykernel>=6.0
+pytest>=8.0
