@@ -1,0 +1,9 @@
+{
+ "target": "bot",
+ "tests": "new",
+ "mutants": 29,
+ "killed": 29,
+ "score": 100.0,
+ "survivors": [],
+ "seconds": 32
+}

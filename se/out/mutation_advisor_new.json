@@ -1,0 +1,19 @@
+{
+ "target": "advisor",
+ "tests": "new",
+ "mutants": 45,
+ "killed": 36,
+ "score": 80.0,
+ "survivors": [
+  "سطر 34: and → or",
+  "سطر 53: 0 → 1",
+  "سطر 49: LtE → Lt",
+  "سطر 54: 1 → 2",
+  "سطر 59: Gt → GtE",
+  "سطر 36: Lt → LtE",
+  "سطر 55: 1 → 2",
+  "سطر 36: 0 → 1",
+  "سطر 51: FloorDiv → Mult"
+ ],
+ "seconds": 79
+}

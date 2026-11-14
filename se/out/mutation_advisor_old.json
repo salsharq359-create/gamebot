@@ -1,0 +1,30 @@
+{
+ "target": "advisor",
+ "tests": "old",
+ "mutants": 45,
+ "killed": 25,
+ "score": 55.6,
+ "survivors": [
+  "سطر 34: and → or",
+  "سطر 20: True → False",
+  "سطر 49: or → and",
+  "سطر 53: 0 → 1",
+  "سطر 80: Mult → FloorDiv",
+  "سطر 39: and → or",
+  "سطر 49: LtE → Lt",
+  "سطر 49: LtE → Lt",
+  "سطر 54: 1 → 2",
+  "سطر 59: Gt → GtE",
+  "سطر 39: GtE → Gt",
+  "سطر 36: Lt → LtE",
+  "سطر 49: 0 → 1",
+  "سطر 55: 1 → 2",
+  "سطر 39: 0 → 1",
+  "سطر 51: 0 → 1",
+  "سطر 75: Div → Mult",
+  "سطر 75: 1 → 2",
+  "سطر 36: 0 → 1",
+  "سطر 51: FloorDiv → Mult"
+ ],
+ "seconds": 79
+}

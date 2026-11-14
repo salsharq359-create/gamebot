@@ -1,0 +1,23 @@
+{
+ "Django (backend/core)": {
+  "lines": 708,
+  "covered": 606,
+  "line_pct": 85.6,
+  "branches": 146,
+  "branch_pct": 70.5
+ },
+ "Bot server (realtime)": {
+  "lines": 449,
+  "covered": 250,
+  "line_pct": 55.7,
+  "branches": 162,
+  "branch_pct": 65.4
+ },
+ "App (app/gb)": {
+  "lines": 966,
+  "covered": 533,
+  "line_pct": 55.2,
+  "branches": 270,
+  "branch_pct": 41.5
+ }
+}

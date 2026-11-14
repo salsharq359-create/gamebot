@@ -1,0 +1,9 @@
+{
+ "target": "rules",
+ "tests": "new",
+ "mutants": 22,
+ "killed": 22,
+ "score": 100.0,
+ "survivors": [],
+ "seconds": 164
+}

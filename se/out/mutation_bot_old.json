@@ -1,0 +1,27 @@
+{
+ "target": "bot",
+ "tests": "old",
+ "mutants": 29,
+ "killed": 12,
+ "score": 41.4,
+ "survivors": [
+  "سطر 119: Eq → NotEq",
+  "سطر 122: Lt → LtE",
+  "سطر 124: 0 → 1",
+  "سطر 128: 3 → 4",
+  "سطر 58: False → True",
+  "سطر 63: Is → IsNot",
+  "سطر 70: In → NotIn",
+  "سطر 72: False → True",
+  "سطر 73: In → NotIn",
+  "سطر 80: In → NotIn",
+  "سطر 84: IsNot → Is",
+  "سطر 121: Add → Sub",
+  "سطر 121: 0 → 1",
+  "سطر 122: 3 → 4",
+  "سطر 121: 1 → 2",
+  "سطر 121: 0 → 1",
+  "سطر 151: True → False"
+ ],
+ "seconds": 31
+}

@@ -1,0 +1,375 @@
+{
+ "files": 26,
+ "sloc": 3599,
+ "functions": 280,
+ "avg_cc": 3.9,
+ "max_cc": 26,
+ "ranks": {
+  "A": 229,
+  "B": 29,
+  "C": 18,
+  "D": 4
+ },
+ "over_10": 22,
+ "over_20": 4,
+ "worst": [
+  {
+   "file": "backend/core/views.py",
+   "name": "offline_sync",
+   "cc": 26,
+   "rank": "D",
+   "lines": 68
+  },
+  {
+   "file": "app/gb/engine/bot.py",
+   "name": "run_session",
+   "cc": 23,
+   "rank": "D",
+   "lines": 44
+  },
+  {
+   "file": "realtime/realtime/bot.py",
+   "name": "run_session",
+   "cc": 23,
+   "rank": "D",
+   "lines": 44
+  },
+  {
+   "file": "app/gb/app.py",
+   "name": "GameBotApp.show_lab",
+   "cc": 22,
+   "rank": "D",
+   "lines": 125
+  },
+  {
+   "file": "app/gb/app.py",
+   "name": "GameBotApp.sync_once",
+   "cc": 20,
+   "rank": "C",
+   "lines": 33
+  },
+  {
+   "file": "app/gb/app.py",
+   "name": "GameBotApp.show_analytics",
+   "cc": 18,
+   "rank": "C",
+   "lines": 86
+  },
+  {
+   "file": "app/gb/app.py",
+   "name": "GameBotApp.show_network",
+   "cc": 17,
+   "rank": "C",
+   "lines": 67
+  },
+  {
+   "file": "app/gb/engine/games.py",
+   "name": "CoinCollector.plan",
+   "cc": 16,
+   "rank": "C",
+   "lines": 36
+  },
+  {
+   "file": "backend/core/views.py",
+   "name": "analytics",
+   "cc": 16,
+   "rank": "C",
+   "lines": 40
+  },
+  {
+   "file": "realtime/realtime/games.py",
+   "name": "CoinCollector.plan",
+   "cc": 16,
+   "rank": "C",
+   "lines": 36
+  }
+ ],
+ "per_file": [
+  {
+   "file": "app/gb/app.py",
+   "sloc": 1216,
+   "mi": 0.0
+  },
+  {
+   "file": "backend/core/views.py",
+   "sloc": 544,
+   "mi": 14.7
+  },
+  {
+   "file": "realtime/realtime/games.py",
+   "sloc": 209,
+   "mi": 33.3
+  },
+  {
+   "file": "app/gb/engine/games.py",
+   "sloc": 209,
+   "mi": 33.6
+  },
+  {
+   "file": "app/gb/client.py",
+   "sloc": 163,
+   "mi": 36.4
+  },
+  {
+   "file": "realtime/realtime/server.py",
+   "sloc": 169,
+   "mi": 42.5
+  },
+  {
+   "file": "app/gb/ui.py",
+   "sloc": 74,
+   "mi": 43.2
+  },
+  {
+   "file": "app/gb/offline.py",
+   "sloc": 145,
+   "mi": 46.9
+  },
+  {
+   "file": "app/gb/tm355/errorcontrol.py",
+   "sloc": 89,
+   "mi": 53.1
+  },
+  {
+   "file": "app/gb/tm355/lab.py",
+   "sloc": 65,
+   "mi": 57.3
+  },
+  {
+   "file": "app/gb/tm355/lz77.py",
+   "sloc": 68,
+   "mi": 58.5
+  },
+  {
+   "file": "realtime/realtime/bot.py",
+   "sloc": 48,
+   "mi": 59.0
+  },
+  {
+   "file": "backend/core/auth.py",
+   "sloc": 83,
+   "mi": 59.8
+  },
+  {
+   "file": "backend/core/middleware.py",
+   "sloc": 18,
+   "mi": 60.0
+  },
+  {
+   "file": "app/gb/engine/bot.py",
+   "sloc": 48,
+   "mi": 60.7
+  },
+  {
+   "file": "app/gb/tm355/huffman.py",
+   "sloc": 52,
+   "mi": 64.3
+  },
+  {
+   "file": "app/gb/tm355/framecodec.py",
+   "sloc": 55,
+   "mi": 66.7
+  },
+  {
+   "file": "realtime/realtime/framecodec.py",
+   "sloc": 55,
+   "mi": 66.7
+  },
+  {
+   "file": "backend/core/advisor.py",
+   "sloc": 44,
+   "mi": 67.6
+  },
+  {
+   "file": "app/gb/tm355/channel.py",
+   "sloc": 46,
+   "mi": 68.5
+  },
+  {
+   "file": "backend/core/models.py",
+   "sloc": 89,
+   "mi": 73.2
+  },
+  {
+   "file": "app/gb/tm355/infotheory.py",
+   "sloc": 26,
+   "mi": 74.8
+  },
+  {
+   "file": "app/gb/tm355/networks.py",
+   "sloc": 32,
+   "mi": 79.5
+  },
+  {
+   "file": "app/gb/tm355/securecodec.py",
+   "sloc": 32,
+   "mi": 89.2
+  },
+  {
+   "file": "backend/core/admin.py",
+   "sloc": 16,
+   "mi": 100.0
+  },
+  {
+   "file": "backend/core/apps.py",
+   "sloc": 4,
+   "mi": 100.0
+  }
+ ],
+ "classes": [
+  {
+   "file": "app/gb/app.py",
+   "class": "GameBotApp",
+   "nom": 56,
+   "wmc": 288,
+   "dit": 1,
+   "cbo": 8,
+   "lines": 1338
+  },
+  {
+   "file": "realtime/realtime/games.py",
+   "class": "CoinCollector",
+   "nom": 8,
+   "wmc": 48,
+   "dit": 1,
+   "cbo": 0,
+   "lines": 129
+  },
+  {
+   "file": "app/gb/offline.py",
+   "class": "OfflineQueue",
+   "nom": 13,
+   "wmc": 45,
+   "dit": 1,
+   "cbo": 3,
+   "lines": 151
+  },
+  {
+   "file": "app/gb/client.py",
+   "class": "Api",
+   "nom": 10,
+   "wmc": 29,
+   "dit": 1,
+   "cbo": 2,
+   "lines": 85
+  },
+  {
+   "file": "realtime/realtime/games.py",
+   "class": "TicTacToe",
+   "nom": 6,
+   "wmc": 29,
+   "dit": 1,
+   "cbo": 0,
+   "lines": 62
+  },
+  {
+   "file": "app/gb/client.py",
+   "class": "BotSocket",
+   "nom": 8,
+   "wmc": 20,
+   "dit": 1,
+   "cbo": 1,
+   "lines": 71
+  },
+  {
+   "file": "realtime/realtime/framecodec.py",
+   "class": "Encoder",
+   "nom": 4,
+   "wmc": 11,
+   "dit": 1,
+   "cbo": 0,
+   "lines": 32
+  },
+  {
+   "file": "realtime/realtime/framecodec.py",
+   "class": "Decoder",
+   "nom": 2,
+   "wmc": 9,
+   "dit": 1,
+   "cbo": 0,
+   "lines": 23
+  },
+  {
+   "file": "realtime/realtime/games.py",
+   "class": "NumberGuess",
+   "nom": 3,
+   "wmc": 8,
+   "dit": 1,
+   "cbo": 0,
+   "lines": 31
+  },
+  {
+   "file": "backend/core/middleware.py",
+   "class": "SimpleCorsMiddleware",
+   "nom": 2,
+   "wmc": 6,
+   "dit": 1,
+   "cbo": 0,
+   "lines": 19
+  }
+ ],
+ "max_wmc": 288,
+ "max_dit": 2,
+ "coupling": [
+  {
+   "module": "app.gb.app",
+   "ce": 7,
+   "ca": 0,
+   "instability": 1.0
+  },
+  {
+   "module": "app.gb.tm355.lab",
+   "ce": 6,
+   "ca": 1,
+   "instability": 0.86
+  },
+  {
+   "module": "app.gb.offline",
+   "ce": 2,
+   "ca": 1,
+   "instability": 0.67
+  },
+  {
+   "module": "app.gb.tm355.infotheory",
+   "ce": 0,
+   "ca": 3,
+   "instability": 0.0
+  },
+  {
+   "module": "backend.core.models",
+   "ce": 0,
+   "ca": 3,
+   "instability": 0.0
+  },
+  {
+   "module": "backend.core.views",
+   "ce": 3,
+   "ca": 0,
+   "instability": 1.0
+  },
+  {
+   "module": "app.gb.client",
+   "ce": 0,
+   "ca": 2,
+   "instability": 0.0
+  },
+  {
+   "module": "app.gb.engine.bot",
+   "ce": 1,
+   "ca": 1,
+   "instability": 0.5
+  },
+  {
+   "module": "app.gb.engine.games",
+   "ce": 0,
+   "ca": 2,
+   "instability": 0.0
+  },
+  {
+   "module": "app.gb.tm355.channel",
+   "ce": 1,
+   "ca": 1,
+   "instability": 0.5
+  }
+ ]
+}
