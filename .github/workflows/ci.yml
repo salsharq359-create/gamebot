@@ -1,0 +1,38 @@
+# TM354 (الوحدة 12): التكامل المستمر — كل دفع (push) يشغّل كل الاختبارات وبوابة الجودة.
+# أي فشل يمنع الدمج، فلا يدخل الفرع الرئيسي كود يكسر متطلباً أو يرفع التعقيد فوق الحد.
+name: ci
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:                       # اختبار السباق في المحفظة يحتاج قاعدة تسمح بكتابات متزامنة
+        image: postgres:16
+        env: {POSTGRES_PASSWORD: ci, POSTGRES_DB: gamebot}
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_HOST: localhost
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: ci
+      DATABASE_NAME: gamebot
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: المكتبات
+        run: |
+          pip install -r backend/requirements.txt -r realtime/requirements.txt -r app/requirements.txt
+          pip install -r analytics/requirements.txt pytest pytest-asyncio radon coverage
+      - name: Django (المصادقة، المحفظة، المزامنة، المستشار، العقود)
+        run: cd backend && python manage.py test core
+      - name: خادم الروبوت (آلة الحالات، الألعاب، الاختبار الشامل)
+        run: cd realtime && python -m pytest -q
+      - name: التطبيق (الطابور المشفّر، TM355، حالة الجلسة)
+        run: cd app && python -m pytest -q
+      - name: الخوارزميات والتحليلات
+        run: python -m pytest -q algorithms/tests analytics/tests
+      - name: بوابة الجودة (التعقيد ≤ 20 والتتبع)
+        run: python -m pytest -q se/tests && python se/trace.py && python se/metrics.py
