@@ -1,0 +1,79 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+skinparam linetype polyline
+actor "Player" as P
+actor "Bot server" as RS <<system>>
+rectangle "GameBot" {
+  usecase "Register / log in" as UC1
+  usecase "Link games" as UC2
+  usecase "Ask the advisor for a plan" as UC3
+  usecase "Run the robot" as UC4
+  usecase "Stop the robot" as UC5
+  usecase "Play offline on the device" as UC6
+  usecase "Sync offline results" as UC7
+  usecase "View earnings and analytics" as UC8
+  usecase "Request a withdrawal (simulated)" as UC9
+  usecase "Add a platform and a manual earning" as UC10
+  usecase "Export my data / delete my account" as UC11
+  usecase "Authenticate" as AUTH
+}
+P -right-> UC1
+P -right-> UC2
+P -right-> UC3
+P -right-> UC4
+P -right-> UC5
+P -right-> UC8
+P -right-> UC9
+P -right-> UC10
+P -right-> UC11
+UC1 -[hidden]down- UC2
+UC2 -[hidden]down- UC3
+UC3 -[hidden]down- UC4
+UC4 -[hidden]down- UC5
+UC5 -[hidden]down- UC8
+UC8 -[hidden]down- UC9
+UC9 -[hidden]down- UC10
+UC10 -[hidden]down- UC11
+UC4 -[hidden]right- UC6
+UC6 -[hidden]down- UC7
+UC7 -[hidden]down- AUTH
+UC4 ..> AUTH : <<include>>
+UC9 ..> AUTH : <<include>>
+UC6 ..> UC4 : <<extend>>\n[no connection]
+UC7 ..> AUTH : <<include>>
+UC6 ..> UC7 : <<precedes>>
+UC6 -right- RS
+note right of UC7
+  Results are stored encrypted on the device
+  and the server checks every record on sync
+end note
+@enduml

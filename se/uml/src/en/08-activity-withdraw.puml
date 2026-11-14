@@ -1,0 +1,72 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+|User|
+start
+:Choose amount and method;
+|App|
+:POST /api/withdrawals/;
+|Server (Django)|
+if (known method?) then (no)
+  :400;
+  stop
+endif
+if (amount > 0?) then (no)
+  :400;
+  stop
+endif
+:BEGIN;
+|Database|
+:SELECT … FOR UPDATE\n(lock the user row);
+note right
+  any other withdrawal for the same user
+  waits here until COMMIT
+end note
+|Server (Django)|
+if (amount ≤ balance?) then (no)
+  :ROLLBACK\n400 insufficient balance;
+  stop
+else (yes)
+  |Database|
+  :INSERT Withdrawal;
+  |Server (Django)|
+  :check_invariant(balance ≥ 0);
+  :COMMIT;
+  fork
+    :security log;
+  fork again
+    :notification;
+  end fork
+endif
+|App|
+:Show new balance;
+stop
+@enduml

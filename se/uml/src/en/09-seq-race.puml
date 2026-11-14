@@ -1,0 +1,52 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+participant "Request 1" as A
+database PostgreSQL as DB
+participant "Request 2" as B
+== Before TM354: transaction.atomic only ==
+A -> DB : balance?
+B -> DB : balance?
+DB --> A : 5$
+DB --> B : 5$
+A -> DB : INSERT 5$ (OK)
+B -> DB : INSERT 5$ (OK)
+note over A, B #FFE0E0 : balance = -5$ (invariant broken). In the test: 5 requests left -20$
+== After TM354: SELECT … FOR UPDATE ==
+A -> DB : lock user
+B -> DB : lock user
+note right of B : waits
+A -> DB : balance? 5$, INSERT 5$, COMMIT
+DB --> B : lock granted
+B -> DB : balance? 0$
+DB --> B : 400 insufficient balance
+note over A, B #E0FFE0 : exactly one succeeds; balance 0
+@enduml

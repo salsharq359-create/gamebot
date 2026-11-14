@@ -1,0 +1,97 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+skinparam linetype polyline
+interface Game <<Protocol>> {
+  +play_round() : Iterator[dict]
+}
+class CoinCollector {
+  +plan() : (order, best, greedy)
+  -_distances(start)
+}
+class NumberGuess
+class TicTacToe {
+  -_minimax(board, player) <<lru_cache>>
+}
+Game <|.. CoinCollector
+Game <|.. NumberGuess
+Game <|.. TicTacToe
+class "games" as F <<module>> {
+  FACTORIES : dict[str, type]
+  +new_game(key, rng) : Game
+}
+F ..> Game : <<create>>
+class "bot" as B <<module>> {
+  +run_session(games, rounds, tasks, rng, stopped) : Iterator[dict]
+  -_schedule() / _play_round() / _streak_bonus()
+}
+B ..> F : new_game()
+enum State {
+  IDLE
+  RUNNING
+  STOPPING
+  FINISHED
+  STOPPED
+  INTERRUPTED
+  FAILED
+}
+class BotSession {
+  +state : State
+  +local : bool
+  +history
+  +fire(event) : State
+  +can(event) : bool
+  +start(local=False)
+  +active : bool
+  +stop_requested : bool
+}
+BotSession --> State
+BotSession ..> "TRANSITIONS" : reads
+class "server (python-socketio)" as S <<module>>
+class GameBotApp <<Flet>>
+S --> "0..*" BotSession : running[user_id]
+GameBotApp --> "1" BotSession : session
+S ..> B
+GameBotApp ..> B : offline
+note top of Game
+  <b>Strategy</b>
+  the session does not know which game it plays
+end note
+note bottom of F
+  <b>Factory</b>
+  a new game = one class + one line
+end note
+note bottom of BotSession
+  <b>State</b>
+  table-driven
+  a transition not in the table raises IllegalTransition
+end note
+@enduml

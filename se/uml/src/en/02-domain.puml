@@ -1,0 +1,105 @@
+@startuml
+skinparam dpi 150
+skinparam defaultFontName Cairo
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam ArrowColor #141B3D
+skinparam ActorBorderColor #141B3D
+skinparam UsecaseBorderColor #141B3D
+skinparam UsecaseBackgroundColor #F4F7FF
+skinparam ClassBorderColor #141B3D
+skinparam ClassBackgroundColor #F8FAFF
+skinparam ClassHeaderBackgroundColor #E8EEFF
+skinparam StateBorderColor #141B3D
+skinparam StateBackgroundColor #F4F7FF
+skinparam ActivityBorderColor #141B3D
+skinparam ActivityBackgroundColor #F4F7FF
+skinparam ActivityDiamondBackgroundColor #FFF6D6
+skinparam ParticipantBorderColor #141B3D
+skinparam ParticipantBackgroundColor #F4F7FF
+skinparam SequenceLifeLineBorderColor #8A93B5
+skinparam NoteBackgroundColor #FFF8E1
+skinparam NoteBorderColor #E0B84C
+skinparam PackageBorderColor #141B3D
+skinparam NodeBorderColor #141B3D
+skinparam NodeBackgroundColor #F8FAFF
+skinparam ComponentBorderColor #141B3D
+skinparam ComponentBackgroundColor #EEF3FF
+skinparam DatabaseBorderColor #141B3D
+skinparam linetype ortho
+
+hide circle
+hide methods
+skinparam linetype polyline
+class User {
+  username
+  password (PBKDF2)
+}
+class Profile {
+  failed_attempts : int
+  locked_until : datetime
+  daily_limit_min : 0..240
+  leaderboard : bool
+}
+class GamePlatform {
+  key {unique per owner}
+  name
+  is_demo : bool
+}
+class UserGameAccount {
+  linked : bool
+}
+class GameTask {
+  key
+  reward_cents > 0
+  minutes > 0
+  max_per_day
+}
+class EarningRecord {
+  cents
+  source : bot | manual
+  client_id {unique per user}
+  created_at
+}
+class Withdrawal {
+  method
+  cents > 0
+}
+class PlaySession {
+  started_at {unique per user}
+  seconds
+}
+class BotStrategy {
+  minutes_budget
+  expected_cents
+  plan : JSON
+}
+class Notification
+class SecurityEvent
+User "1" -left- "1" Profile
+User "1" -down- "0..*" UserGameAccount
+UserGameAccount "0..*" -down- "1" GamePlatform
+GamePlatform "1" *-down- "1..*" GameTask
+User "0..1" -- "0..*" GamePlatform : owns (custom)
+User "1" -down- "0..*" EarningRecord
+EarningRecord "0..*" -down-> "0..1" GameTask
+User "1" -down- "0..*" Withdrawal
+User "1" -right- "0..*" PlaySession
+User "1" -right- "0..*" BotStrategy
+User "1" -up- "0..*" Notification
+User "1" -up- "0..*" SecurityEvent
+PlaySession -[hidden]down- BotStrategy
+Profile -[hidden]down- Notification
+note bottom of Withdrawal
+  <b>Invariant</b> (OCL)
+  context User inv BalanceNeverNegative:
+    self.earnings.cents->sum() - self.withdrawals.cents->sum() >= 0
+end note
+note right of EarningRecord
+  context EarningRecord inv:
+    self.source = 'bot' implies
+      self.cents = self.task.reward_cents
+  (amount comes from the task table, never the client)
+end note
+@enduml
