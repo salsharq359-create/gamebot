@@ -1,0 +1,142 @@
+platform_id,key,name,is_demo,owner
+1,coins,جمع العملات,1,
+2,guess,تخمين الرقم,1,
+3,xo,إكس أو,1,
+4,ext-7fe94add,fortnite ,0,u_d36cffc5ec
+5,ext-fc3d83e2,Roblox,0,u_c11e1f8803
+6,ext-ac2d6785,FORTNITE,0,u_c11e1f8803
+7,ext-e7957903,Roblox,0,u_8e1d6d3167
+8,ext-b29980c5,Roblox,0,u_de265d2df6
+9,ext-d7893dcf,Clash of Clans,0,u_be1653d0a0
+10,ext-e3c3bea8,Pubg-Mobile,0,u_be1653d0a0
+11,ext-cc4163da,ROBLOX ,0,u_e73c593d04
+12,ext-802554a3,clash of clans,0,u_e73c593d04
+13,ext-d9422b79,ROBLOX ,0,u_ead8f202a9
+14,ext-3c414001,Clash Of Clans,0,u_bdef275e56
+15,ext-dadb6978,freefire,0,u_bdef275e56
+16,ext-74d5627e,FORTNITE,0,u_f9a6f27e25
+17,ext-cf726bc2,roblox,0,u_f9a6f27e25
+18,ext-d668f9e6,Pubg-Mobile,0,u_83f2bb1795
+19,ext-1ffdf900,Roblox,0,u_83f2bb1795
+20,ext-d8ca2cce,pubg mobile ,0,u_68b33e76b7
+21,ext-00e9ac9b,roblox,0,u_5cc48f9abe
+22,ext-cea3bd27,pubg mobile ,0,u_5cc48f9abe
+23,ext-d2d87369,clash of clans,0,u_6bd357569c
+24,ext-1b8acde9,fortnite ,0,u_6bd357569c
+25,ext-886fe333,Pubg-Mobile,0,u_d2da6f57bb
+26,ext-4e5eda54,COC,0,u_2d241cd6f1
+27,ext-54089389,freefire,0,u_2d241cd6f1
+28,ext-d323e25b,fortnite ,0,u_b528cd435a
+29,ext-7ffec4a8,roblox,0,u_81cc95526b
+30,ext-ce72dc85,PUBG,0,u_81cc95526b
+31,ext-6b28cedf,PUBG,0,u_7747b53f6b
+32,ext-1fa8d681,ROBLOX ,0,u_9921e59287
+33,ext-27b64dad,Fortnite,0,u_9921e59287
+34,ext-64954874,PUBG Mobile,0,u_7ba9b76e3a
+35,ext-c8501e13,ROBLOX ,0,u_7ba9b76e3a
+36,ext-16d44a51,Free Fire,0,u_fa930217c0
+37,ext-086c6f5f,PUBG,0,u_dd4e265bbd
+38,ext-0ece2ef2,ROBLOX ,0,u_dd4e265bbd
+39,ext-d3156c7a,Fortnite,0,u_b6cec5be3b
+40,ext-07591780,FREE FIRE,0,u_b6cec5be3b
+41,ext-b1964542,PUBG,0,u_63d89d8a81
+42,ext-2944aa3e,ROBLOX ,0,u_6ab38b0564
+43,ext-530574e4,COC,0,u_6ab38b0564
+44,ext-fdbff816,ROBLOX ,0,u_45a58bd0c4
+45,ext-d0eac121,Fortnite,0,u_f0d35d1515
+46,ext-43b1035d,Roblox,0,u_82b7db5af0
+47,ext-850b9657,Fortnite,0,u_82b7db5af0
+48,ext-cc174d33,roblox,0,u_7abb8e9a58
+49,ext-73246e78,roblox,0,u_e71f33ca9c
+50,ext-e886a475,Clash of Clans,0,u_fbd2cd8550
+51,ext-21b89101,PUBG Mobile,0,u_fbd2cd8550
+52,ext-f171dd9f,fortnite ,0,u_62bf16292c
+53,ext-94ce94d0,Free-Fire,0,u_18a1aa3a78
+54,ext-ee56ffec,COC,0,u_18a1aa3a78
+55,ext-0891a952,freefire,0,u_6f06168e50
+56,ext-c4258abe,Roblox,0,u_c807734925
+57,ext-f2557bf6,PUBG,0,u_c807734925
+58,ext-1bad6ba2,FORTNITE,0,u_c2901b1351
+59,ext-b224f9d9,Pubg-Mobile,0,u_8f3d357897
+60,ext-60f67a9b,Free-Fire,0,u_8f3d357897
+61,ext-db625d40,Fortnite,0,u_03b3d167f4
+62,ext-b6802aac,Pubg-Mobile,0,u_03b3d167f4
+63,ext-895ec5c2,roblox,0,u_18e15fd4b6
+64,ext-9ec2efac,Clash of Clans,0,u_4caba58d23
+65,ext-393d656d,ببجي,0,u_586d89c1e8
+66,ext-bb91a121,Free Fire,0,u_586d89c1e8
+67,ext-d7ace21e,Roblox,0,u_3a6275c3f2
+68,ext-f95f68d6,Clash Of Clans,0,u_3a6275c3f2
+69,ext-101dd56b,Pubg-Mobile,0,u_b34cf8d537
+70,ext-3369fba6,Roblox,0,u_c7e2a9608e
+71,ext-bee1006e,clash of clans,0,u_c7e2a9608e
+72,ext-239570ec,Fortnite,0,u_7259cecee2
+73,ext-cdff9c72,ROBLOX ,0,u_7259cecee2
+74,ext-6148208e,COC,0,u_b5a803fc46
+75,ext-8fa4bab1,Pubg-Mobile,0,u_b5a803fc46
+76,ext-efd6f1b2,FREE FIRE,0,u_09518adcfd
+77,ext-46608e0e,Roblox,0,u_c8f5fac07c
+78,ext-517752d5,clash of clans,0,u_c8f5fac07c
+79,ext-41cf6f94,ROBLOX ,0,u_1114c0f559
+80,ext-bf5178ec,FREE FIRE,0,u_eabb7dc69d
+81,ext-8b324ffa,clash of clans,0,u_b77fe7d901
+82,ext-3b8baef9,FORTNITE,0,u_53b63a6b83
+83,ext-2d6f9228,Free Fire,0,u_53b63a6b83
+84,ext-9df56e41,clash of clans,0,u_419a07c30c
+85,ext-0da6fe6c,Roblox,0,u_419a07c30c
+86,ext-3874727f,Fortnite,0,u_2b539e9abe
+87,ext-a4b91f99,PUBG Mobile,0,u_2b539e9abe
+88,ext-c76c214e,ROBLOX ,0,u_b166d60729
+89,ext-d74c1a43,roblox,0,u_92fb0e1e01
+90,ext-b0583d15,fortnite ,0,u_b0076ef76b
+91,ext-24534eb1,Fortnite,0,u_27d89999a8
+92,ext-cadf756f,ROBLOX ,0,u_27d89999a8
+93,ext-4d0017ed,FREE FIRE,0,u_9cb00bb93d
+94,ext-f8afbcbf,Roblox,0,u_d8f1dd1d14
+95,ext-71428e7f,pubg mobile ,0,u_28e0947b41
+96,ext-7734550e,pubg mobile ,0,u_8add3f1e19
+97,ext-a0f62487,Free-Fire,0,u_8add3f1e19
+98,ext-52d62b39,Free Fire,0,u_5832f3b408
+99,ext-ad74d661,ROBLOX ,0,u_5832f3b408
+100,ext-ced7d030,PUBG,0,u_42ef70f9f4
+101,ext-5ba3c003,Roblox,0,u_a9e2b65b7c
+102,ext-97c12ef1,FREE FIRE,0,u_a9e2b65b7c
+103,ext-acf17c48,roblox,0,u_f9a45cf9c4
+104,ext-7fddb1ae,FORTNITE,0,u_f9a45cf9c4
+105,ext-5babafba,Roblox,0,u_c9fed79463
+106,ext-81798ccd,Fortnite,0,u_c9fed79463
+107,ext-4c192322,Clash of Clans,0,u_b1d6773bfc
+108,ext-326d0980,COC,0,u_db52806d42
+109,ext-d13e451b,fortnite ,0,u_5e438c1b30
+110,ext-ddf1ef6f,pubg mobile ,0,u_c348131f09
+111,ext-edfd1a36,Clash of Clans,0,u_c487cd6a78
+112,ext-076eaef5,ببجي,0,u_c487cd6a78
+113,ext-efd57d15,FREE FIRE,0,u_c7aa46fd08
+114,ext-8a21e265,roblox,0,u_c7aa46fd08
+115,ext-ccffe480,COC,0,u_93923bd0ea
+116,ext-b0f18cc3,roblox,0,u_93923bd0ea
+117,ext-af5f49db,Roblox,0,u_c96e944eb7
+118,ext-04dc7586,freefire,0,u_c96e944eb7
+119,ext-b322e5c7,COC,0,u_f6963bc983
+120,ext-37183b87,Fortnite,0,u_f6963bc983
+121,ext-01d0981e,Free Fire,0,u_a69561dbef
+122,ext-f0c1c051,Clash of Clans,0,u_01bad123f7
+123,ext-0903f584,Roblox,0,u_01bad123f7
+124,ext-7aa7238e,Free Fire,0,u_fc4325685f
+125,ext-d0d1c29c,COC,0,u_fc4325685f
+126,ext-bb289adf,roblox,0,u_c64ebea802
+127,ext-d2f0e7d8,COC,0,u_c64ebea802
+128,ext-8f396178,COC,0,u_7090beee7a
+129,ext-7923632e,fortnite ,0,u_fa28570704
+130,ext-85ef4af7,PUBG,0,u_fa28570704
+131,ext-ae558eda,clash of clans,0,u_821047c51b
+132,ext-48e640fe,Clash of Clans,0,u_71f1f6a6d7
+133,ext-bbd68fd0,Fortnite,0,u_71f1f6a6d7
+134,ext-f7f56cfc,ROBLOX ,0,u_cb346d9d7a
+135,ext-8304b28a,roblox,0,u_47d4b1b178
+136,ext-527797d0,Pubg-Mobile,0,u_47d4b1b178
+137,ext-a841cc6f,ببجي,0,u_600d5bb2a4
+138,ext-4fb831aa,Roblox,0,u_7ecd67e14d
+139,ext-2a7c18e8,PUBG Mobile,0,u_7ecd67e14d
+140,ext-104c561e,fortnite ,0,u_8008c61807
+141,ext-317dd416,roblox,0,u_8008c61807
