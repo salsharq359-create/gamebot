@@ -1,0 +1,26 @@
+# يقرأه أمر `flet build` لبناء تطبيق أندرويد (apk) وآيفون (ipa).
+# غيّر org إلى نطاقك العكسي (مثل com.yourname) قبل النشر على المتجر.
+[project]
+name = "gamebot"
+version = "1.0.0"
+description = "جيم بوت: روبوت يلعب الألعاب ويجمع الأرباح (تطبيق بايثون)"
+requires-python = ">=3.12"
+dependencies = [
+  "flet==1.0.3",
+  "httpx>=0.27",
+  "python-socketio[asyncio_client]>=5.11",
+  "cryptography>=42",
+]
+
+[tool.flet]
+org = "com.example"
+product = "GameBot"
+company = "GameBot"
+copyright = "Copyright 2026 GameBot"
+
+# إصلاح بناء أندرويد في Flet 1.0.3: قالب البناء يثبّت مكتبة Dart المسماة jni على 1.0.0،
+# بينما jni_flutter 1.0.4+1 (تأتي مع path_provider_android) تحتاج 1.1 فيفشل التجميع:
+#   "The generated bindings expect package:jni ^1.1.0, but 1.0.x was imported."
+# هذا هو الحل المؤقت الذي يقترحه فريق Flet نفسه (github.com/flet-dev/flet/pull/6920) حتى يصدر الإصلاح.
+[tool.flet.flutter.pubspec.dependency_overrides]
+jni = "^1.1.0"
